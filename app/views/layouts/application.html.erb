@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "E Commerce Shoping Store" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+  </head>
+
+  <body>
+     <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+        <% if user_signed_in? %>
+          <%= current_user.email %>
+          <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+          <%= link_to 'Account setting', edit_user_registration_path %>
+
+        <% else %>
+          <%= link_to 'Log in', new_user_session_path %>
+          <%= link_to 'Sign up', new_user_registration_path %>
+        <% end %>
+
+    <%= yield %>
+    
+  </body>
+</html>
