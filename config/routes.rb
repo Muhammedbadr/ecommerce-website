@@ -28,5 +28,8 @@ Rails.application.routes.draw do
   root "home#homepage"
   get 'homepage', to: 'home#homepage'
   # Define a route for the services page
-
+  # devise_for :users, controllers: { sessions: 'users/sessions' }
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
 end
